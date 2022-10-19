@@ -11,10 +11,8 @@ function callback(mutations) {
     start = performance.now();
     if (mutations[0].addedNodes.length) {
         popUp = mutations[0].addedNodes[0];
-        observer2.observe(popUp, {childList: true, subtree: true, attributes: true});
-    }
-    else if(mutations[0].removedNodes.length) {
         observer.disconnect();
+        observer2.observe(popUp, {childList: true, subtree: true, attributes: true});
     }
 }
 
