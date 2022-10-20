@@ -1,0 +1,22 @@
+{
+    "name": "Genshin Web Automation",
+    "version": "0.1.0",
+    "description": "Automates the functionality of particular Genshin Impact web events",
+    "permissions": ["scripting", "storage", "tabs"],
+    "host_permissions": [
+        "https://act.hoyolab.com/puzzle/bbs/pz_fKWaqWI9U4/index.html?*"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [{
+        "matches": ["https://act.hoyolab.com/puzzle/bbs/pz_fKWaqWI9U4/index.html?*"],
+        "js": ["hidden_civilizations.js"]
+    }],
+    "action": {
+        "default_icon": "assets/Games-GenshinImpact.svg",
+        "default_title": "Genshin Web Automation",
+        "default_popup": "popup.html"
+    },
+    "manifest_version": 3
+}
