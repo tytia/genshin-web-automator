@@ -9,35 +9,40 @@
  * Press Ctrl+Shift+I on the event webpage and paste into the DevTools console to run.
  */
 
-const redeemBtn = document.querySelector(".right-bottom_right.daily"); // 'x60 Primogems' reward redeem button
+const redeemBtn = document.querySelector(".right-bottom_right.daily"); // reward redeem button
 const timerNode = document.querySelector(".van-count-down"); // timer display
 const coinsNode = document.querySelector(".hyl-task-count_text");
-var coins = coinsNode.textContent;
-var popUp, cost, redeemCountNode, start, i;
 
-const btnObserver = new MutationObserver(redeemPrimos);
+const timerObserver = new MutationObserver(redeemPrimos);
 const coinsObserver = new MutationObserver(updateCoins);
 const popUpObserver = new MutationObserver(popUpHandler);
 const popUpObserver2 = new MutationObserver(redeemPopUp);
 const popUpObserver3 = new MutationObserver(redeemPopUp2);
 
-btnObserver.observe(timerNode.childNodes[0], {characterData: true});
+var coins = coinsNode.textContent;
+var popUp, cost, redeemCountNode, start, i;
+
+timerObserver.observe(timerNode.childNodes[0], {characterData: true});
 coinsObserver.observe(coinsNode.childNodes[0], {characterData: true});
 
-// if script is activated when reward is already available for redemption
-if (timerNode.textContent === "Redeem Now") {
-    start = performance.now();
-    btnObserver.disconnect();
-    popUpObserver.observe(document.body, {childList: true});
-    redeemBtn.click();
-}
-
+// TODO: implement reward selection
 function redeemPrimos() {
     if (timerNode.textContent === "Redeem Now") {
         start = performance.now();
-        btnObserver.disconnect();
+        timerObserver.disconnect();
         popUpObserver.observe(document.body, {childList: true});
         redeemBtn.click();
+    }
+    else if (timerNode.textContent === "Purchase Limit") {
+        if (document.querySelector(".van-count-down").textContent === "Purchase Limit") {
+            alert("You have reached the purchase limit for every reward.");
+        }
+        else {
+            alert("You have reached the purchase limit for your selected reward.");
+            // timerObserver.disconnect();
+            // popUpObserver.observe(document.body, {childList: true});
+            // document.querySelector(".right-bottom_right.daily").click();
+        }
     }
 }
 
