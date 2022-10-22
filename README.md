@@ -1,4 +1,4 @@
-# genshin-web-automation
+# genshin-web-automator
 Automates the functionality of particular Genshin Impact web events.
 
 ### Includes:
